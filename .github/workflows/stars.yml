@@ -1,0 +1,25 @@
+name: Stars
+
+on:
+  watch:
+    types: [started]
+  workflow_call:
+    secrets:
+      ntfy_url:
+        required: true
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Info
+        run: |
+          REPO="$(echo '${{ github.repository }}' | cut -d'_' -f2)"
+          echo "Repository: $REPO"
+          echo "Event: ${{ github.event_name }}"
+          echo "User: ${{ github.actor }}"
+          echo "Done!"
+      - name: Ntfy
+        run: |
+          REPO="$(echo '${{ github.repository }}' | cut -d'_' -f2)"
+          curl -d "${{ github.actor }} starred $REPO" ${{ secrets.ntfy_url }}
