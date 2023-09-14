@@ -14,12 +14,12 @@ jobs:
     steps:
       - name: Print Info
         run: |
-          REPO="$(echo '${{ github.repository }}' | cut -d'_' -f2)"
+          REPO="$(echo '${{ github.repository }}' | cut -d'/' -f2)"
           echo "Repository: $REPO"
           echo "Event: ${{ github.event_name }}"
           echo "User: ${{ github.actor }}"
           echo "Done!"
       - name: Ntfy
         run: |
-          REPO="$(echo '${{ github.repository }}' | cut -d'_' -f2)"
+          REPO="$(echo '${{ github.repository }}' | cut -d'/' -f2)"
           curl -d "${{ github.actor }} starred $REPO" ${{ secrets.ntfy_url }}
