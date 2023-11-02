@@ -22,4 +22,4 @@ jobs:
       - name: Ntfy
         run: |
           REPO="$(echo '${{ github.repository }}' | cut -d'/' -f2)"
-          curl -d "${{ github.actor }} starred your repository $REPO" ${{ secrets.ntfy_url }}
+          curl -H "Title: ${{ github.repository }}" -d "${{ github.actor }} starred your repository." ${{ secrets.ntfy_url }}
