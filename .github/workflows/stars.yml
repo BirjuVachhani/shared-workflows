@@ -27,9 +27,8 @@ jobs:
         id: send_message
         uses: akeylimepie/telegram-action@main
         with:
-          token: ${{ secrets.TOKEN }}
+          token: ${{ secrets.BOT_TOKEN }}
           chat_id: ${{ secrets.CHAT_ID }}
-          message_thread_id: ${{ secrets.TOPIC_ID }}
           parse_mode: html
           disable_notification: true
           text: |
