@@ -24,10 +24,8 @@ jobs:
           REPO="$(echo '${{ github.repository }}' | cut -d'/' -f2)"
           curl -H "Title: ${{ github.repository }}" -d "${{ github.actor }} starred your repository." ${{ secrets.ntfy_url }}
       - name: Telegram
-        uses: appleboy/telegram-action@master
+        uses: colutius/Telegram-Msg@main
         with:
-          to: ${{ secrets.CHAT_ID }}
           token: ${{ secrets.BOT_TOKEN }}
-          message: |
-            ${{ github.actor }} starred your repository:
-            ${{ github.repository }}
+          chatid: ${{ secrets.CHAT_ID }}
+          message: ${{ github.actor }} starred your repository ${{ github.repository }}.
