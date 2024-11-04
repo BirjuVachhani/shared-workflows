@@ -23,3 +23,10 @@ jobs:
         run: |
           REPO="$(echo '${{ github.repository }}' | cut -d'/' -f2)"
           curl -H "Title: ${{ github.repository }}" -d "${{ github.actor }} starred your repository." ${{ secrets.ntfy_url }}
+      - name: Telegram
+        uses: robotomize/notify-telegram@v0.1.0
+        with:
+          chat: ${{ secrets.CHAT_ID }} # user id or channel name secret
+          token: ${{ secrets.BOT_TOKEN }} # token secret
+          status: ${{ job.status }} # do not modify this line
+          message: ${{ github.actor }} starred your repository ${{ github.repository }} # custom message
