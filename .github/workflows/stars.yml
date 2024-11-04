@@ -24,14 +24,10 @@ jobs:
           REPO="$(echo '${{ github.repository }}' | cut -d'/' -f2)"
           curl -H "Title: ${{ github.repository }}" -d "${{ github.actor }} starred your repository." ${{ secrets.ntfy_url }}
       - name: Telegram
-        id: send_message
-        uses: akeylimepie/telegram-action@main
+        uses: appleboy/telegram-action@master
         with:
+          to: ${{ secrets.CHAT_ID }}
           token: ${{ secrets.BOT_TOKEN }}
-          chat_id: ${{ secrets.CHAT_ID }}
-          parse_mode: html
-          disable_notification: true
-          text: |
-            ${{ github.actor }} starred your repository <a href="https://github.com/${{ github.repository }}">${{ github.repository }}</a>
-      - run: |
-          echo "Message ID: ${{ steps.send_message.outputs.message_id }}"# custom message
+          message: |
+            ${{ github.actor }} starred your repository:
+            ${{ github.repository }}
